@@ -2,6 +2,11 @@
 
 ![image](https://github.com/user-attachments/assets/52dbf475-b23b-4b06-ae7d-0bfa7d85ed3d)
 
+# 이재웅
+- https://github.com/jamesnet214
+- https://jamesnet.dev
+- https://github.com/jamesnetgroup
+
 # Ollama API Management System
 
 ## 📑 목차
