@@ -512,3 +512,20 @@ public MainViewModel()
 - LLM 로컬 모델 시작(Run): https://localhost:7171/api/models/{model.Name}/start
 - LLM 로컬 모델 중지(Stop): https://localhost:7171/api/models/{model.Name}/stop
 - LLM 채팅(질문): https://localhost:7171/api/chat { message = Message, model = CurrentModel.Name }
+
+------------
+
+
+
+# OpenSilver 설치 방법
+wasm-tools 워크로드 설치
+```
+dotnet workload install wasm-tools
+```
+
+오픈실버 홈페이지
+```
+[http://opensilver.com](https://opensilver.net/)
+```
+
+
