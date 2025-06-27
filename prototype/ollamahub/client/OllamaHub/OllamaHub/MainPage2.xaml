@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="OllamaHub.MainPage2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:OllamaHub">
+    
+    <Grid>
+        <ListBox ItemsSource="{Binding Models}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="{Binding Name}"/>
+                        <TextBlock Margin="5" Text="{Binding Status}"/>
+                        <TextBlock Margin="5" Text="{Binding Size}"/>
+                        <Button Margin="5" Content="시작" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.StartCommand}"
+                                CommandParameter="{Binding}"/>
+                        <Button Margin="5" Content="중지" Command="{Binding StopCommand}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

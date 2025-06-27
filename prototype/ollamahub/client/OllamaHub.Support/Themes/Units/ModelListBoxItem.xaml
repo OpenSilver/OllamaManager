@@ -1,0 +1,63 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:units="clr-namespace:OllamaHub.Support.UI.Units">
+
+    <Style TargetType="units:ModelListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="units:ModelListBoxItem">
+                    <Border BorderBrush="{DynamicResource BorderColor}" 
+                            BorderThickness="0,0,0,1" 
+                            Padding="24,20,24,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" 
+                                        Orientation="Horizontal" 
+                                        VerticalAlignment="Center">
+                                <Border Width="48" Height="48" 
+                                        CornerRadius="12" 
+                                        Background="{DynamicResource PurpleGradient}"
+                                        Margin="0,0,16,0"
+                                        VerticalAlignment="Center">
+                                    <Path Data="{DynamicResource BotIcon}" 
+                                          Fill="White" 
+                                          Stretch="Uniform" 
+                                          Width="24" Height="24"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                                </Border>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" 
+                                               FontSize="16" 
+                                               FontWeight="SemiBold" 
+                                               Foreground="{DynamicResource TextPrimaryColor}"/>
+                                    <TextBlock FontSize="12" 
+                                               Foreground="{DynamicResource TextMutedColor}" 
+                                               Margin="0,4,0,0">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="Size: {0} • Last used: {1}">
+                                                <Binding Path="Size"/>
+                                                <Binding Path="LastUsed"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+
+                                <units:ModelStatusBadge Status="{Binding Status}"/>
+                                <units:PlayStopButton ModelStatus="{Binding Status}" Command="{Binding DataContext.ToggleModelCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

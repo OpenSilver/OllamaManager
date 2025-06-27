@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <DefineSilverlight>true</DefineSilverlight>
+	<LangVersion>12</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Local\Converters\EqualToVisibilityConverter.cs" />
+    <Compile Include="Local\Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Local\Models\ModelItem.cs" />
+    <Compile Include="Local\Services\ApiClient.cs" />
+    <Compile Include="UI\Units\AIMessageListBoxItem.cs" />
+    <Compile Include="UI\Units\ApplicationHeader.cs" />
+    <Compile Include="UI\Units\ChatListBox.cs" />
+    <Compile Include="UI\Units\DeleteButton.cs" />
+    <Compile Include="UI\Units\GlobalStatus.cs" />
+    <Compile Include="UI\Units\GlobalStatusBadge.cs" />
+    <Compile Include="UI\Units\ModelListBox.cs" />
+    <Compile Include="UI\Units\ModelListBoxItem.cs" />
+    <Compile Include="UI\Units\ModelStatus.cs" />
+    <Compile Include="UI\Units\ModelStatusBadge.cs" />
+    <Compile Include="UI\Units\ModelTagButton.cs" />
+    <Compile Include="UI\Units\NavigationListBox.cs" />
+    <Compile Include="UI\Units\NavigationListBoxItem.cs" />
+    <Compile Include="UI\Units\NavigationRadioButton.cs" />
+    <Compile Include="UI\Units\OllamaComboBox.cs" />
+    <Compile Include="UI\Units\OllamaComboBoxItem.cs" />
+    <Compile Include="UI\Units\PlayStopButton.cs" />
+    <Compile Include="UI\Units\PopularModelsPanel.cs" />
+    <Compile Include="UI\Units\SearchTextBox.cs" />
+    <Compile Include="UI\Units\SendButton.cs" />
+    <Compile Include="UI\Units\UserMessageListBoxItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="OpenSilver" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\AIMessageListBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\OllamaComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\UserMessageListBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\ChatListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\ModelListBoxItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\ModelListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\GlobalStatusBadge.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\NavigationRadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\PlayStopToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\DeleteButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\SendButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\ApplicationHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Units\ModelStatusBadge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+</Project>

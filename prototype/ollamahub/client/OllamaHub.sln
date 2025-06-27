@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Browser", "OllamaHub\OllamaHub.Browser\OllamaHub.Browser.csproj", "{9EF27883-00DC-45D4-BB3F-E7584055D3B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub", "OllamaHub\OllamaHub\OllamaHub.csproj", "{9233838B-7D57-4F18-9740-6608154413F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Simulator", "OllamaHub\OllamaHub.Simulator\OllamaHub.Simulator.csproj", "{18616AA1-F705-49D4-AC57-B3C118580DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Support", "OllamaHub.Support\OllamaHub.Support.csproj", "{6E6520DC-94B5-4C77-87F3-CE92649266C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EF27883-00DC-45D4-BB3F-E7584055D3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF27883-00DC-45D4-BB3F-E7584055D3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF27883-00DC-45D4-BB3F-E7584055D3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF27883-00DC-45D4-BB3F-E7584055D3B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9233838B-7D57-4F18-9740-6608154413F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9233838B-7D57-4F18-9740-6608154413F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9233838B-7D57-4F18-9740-6608154413F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9233838B-7D57-4F18-9740-6608154413F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18616AA1-F705-49D4-AC57-B3C118580DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18616AA1-F705-49D4-AC57-B3C118580DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18616AA1-F705-49D4-AC57-B3C118580DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18616AA1-F705-49D4-AC57-B3C118580DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E6520DC-94B5-4C77-87F3-CE92649266C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E6520DC-94B5-4C77-87F3-CE92649266C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E6520DC-94B5-4C77-87F3-CE92649266C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E6520DC-94B5-4C77-87F3-CE92649266C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8842B7F8-0001-4090-A300-290B774D96BB}
+	EndGlobalSection
+EndGlobal

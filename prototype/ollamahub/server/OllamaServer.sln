@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLLMServer", "api\LocalLLMServer\LocalLLMServer.csproj", "{4597E7B4-2762-1F3F-2059-EF0F7657246E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4597E7B4-2762-1F3F-2059-EF0F7657246E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4597E7B4-2762-1F3F-2059-EF0F7657246E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4597E7B4-2762-1F3F-2059-EF0F7657246E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4597E7B4-2762-1F3F-2059-EF0F7657246E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39A72B66-BD23-4C85-A993-C6A5100B3888}
+	EndGlobalSection
+EndGlobal

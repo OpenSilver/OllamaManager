@@ -1,0 +1,20 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/ApplicationHeader.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/SendButton.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/ModelStatusBadge.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/GlobalStatusBadge.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/DeleteButton.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/SearchTextBox.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/PlayStopToggleButton.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/NavigationRadioButton.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/ModelListBox.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/ModelListBoxItem.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/ChatListBox.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/OllamaComboBox.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/AIMessageListBoxItem.xaml"/>
+        <ResourceDictionary Source="/OllamaHub.Support;component/Themes/Units/UserMessageListBoxItem.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
