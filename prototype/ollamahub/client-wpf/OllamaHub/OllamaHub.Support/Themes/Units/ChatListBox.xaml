@@ -1,0 +1,61 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cnvts="clr-namespace:OllamaHub.Support.Local.Converters"
+    xmlns:units="clr-namespace:OllamaHub.Support.UI.Units">
+
+    <cnvts:NullToBooleanConverter x:Key="NullToBooleanConverter"/>
+
+    <Style TargetType="units:ChatListBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="units:ChatListBox">
+                    <Border Background="{DynamicResource SectionBackgroundColor}" 
+                            CornerRadius="16" 
+                            BorderBrush="{DynamicResource BorderColor}" 
+                            BorderThickness="1" 
+                            Height="600">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" BorderBrush="{DynamicResource BorderColor}" BorderThickness="0,0,0,1" Padding="24,16,24,16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="AI Chat" FontSize="18" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryColor}" VerticalAlignment="Center"/>
+                                    <units:OllamaComboBox IsEnabled="{Binding CurrentModel, Converter={StaticResource NullToBooleanConverter}}" Grid.Column="1" ItemsSource="{Binding RunningModels}" SelectedItem="{Binding CurrentModel, Mode=TwoWay}" DisplayMemberPath="Name"/>
+                                </Grid>
+                            </Border>
+
+                            <ScrollViewer Grid.Row="1" Background="{DynamicResource CardBackgroundColor}" Padding="24,24,24,24">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+
+                            <Border Grid.Row="2" BorderBrush="{DynamicResource BorderColor}" 
+                                    BorderThickness="0,1,0,0" Padding="24,16,24,16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <units:SearchTextBox Grid.Column="0" Margin="0,0,12,0" Text="{Binding InputText, Mode=TwoWay}"/>
+
+                                    <units:SendButton Grid.Column="1" Command="{Binding SendMessageCommand}" IsEnabled="{Binding CurrentModel, Converter={StaticResource NullToBooleanConverter}}"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,54 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cnvts="clr-namespace:OllamaHub.Support.Local.Converters;assembly=OllamaHub.Support"
+    xmlns:units="clr-namespace:OllamaHub.Support.UI.Units;assembly=OllamaHub.Support"
+    xmlns:views="clr-namespace:OllamaHub.Main.UI.Views">
+    
+    <cnvts:EqualToVisibilityConverter x:Key="ModelVisibilityConverter" Id="MODEL"/>
+    <cnvts:EqualToVisibilityConverter x:Key="ChatVisibilityConverter" Id="CHAT"/>
+    
+    <Style TargetType="views:MainContent">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="views:MainContent">
+
+                    <Grid Background="{DynamicResource BackgroundGradient}">
+                        <Border Width="1200" MaxHeight="860" MinWidth="500" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="16" Background="{DynamicResource CardBackgroundColor}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Black" Opacity="0.5" BlurRadius="24" ShadowDepth="8"/>
+                            </Border.Effect>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <units:ApplicationHeader/>
+
+                                <Border Grid.Row="1" BorderBrush="{DynamicResource BorderColor}" BorderThickness="0,0,0,1" Padding="32,16,32,16">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <units:NavigationRadioButton x:Name="Model" Content="Model Management" IsChecked="True" GroupName="Navigation"/>
+                                        <units:NavigationRadioButton x:Name="Chat" Content="Chat" GroupName="Navigation"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <ScrollViewer Grid.Row="2" Padding="32,32,32,32" Background="Transparent">
+                                    <Grid>
+                                        <StackPanel Visibility="{Binding ElementName=Model, Path=IsChecked, Converter={StaticResource ModelVisibilityConverter}, ConverterParameter=MODEL}">
+                                            <units:ModelListBox ItemsSource="{Binding Models}"/>
+                                        </StackPanel>
+
+                                        <units:ChatListBox Visibility="{Binding ElementName=Chat, Path=IsChecked, Converter={StaticResource ChatVisibilityConverter}, ConverterParameter=CHAT}" ItemsSource="{Binding ChatMessages}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

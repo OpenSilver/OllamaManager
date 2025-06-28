@@ -21,17 +21,12 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
     <Compile Include="MainPage.xaml.cs" />
-    <Compile Include="MainPage2.xaml.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="MainViewModel2.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,136 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:units="clr-namespace:OllamaHub.Support.UI.Units">
+
+    <!-- Delete Icon Geometry - 사용자가 원하는 대로 변경 가능 -->
+    <Geometry x:Key="DeleteIconGeometry">
+        M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z
+    </Geometry>
+
+    <Style TargetType="units:DeleteButton">
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="units:DeleteButton">
+                    <Border x:Name="RootBorder"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="14"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}">
+                        <Border.Background>
+                            <SolidColorBrush Color="Transparent"/>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect x:Name="ButtonShadow"
+                                              Color="#EF4444"
+                                              Opacity="0"
+                                              BlurRadius="8"
+                                              ShadowDepth="0"/>
+                        </Border.Effect>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <!-- 마우스 상태 그룹 -->
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="RootBorder" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        To="Transparent" Duration="0:0:0.25"/>
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleX" To="1.0" Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleY" To="1.0" Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.25"/>
+                                        <DoubleAnimation Storyboard.TargetName="DeleteIcon" Storyboard.TargetProperty="Opacity" To="0.7" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <!-- 위험한 느낌의 빨간 배경과 그림자 -->
+                                        <ColorAnimation Storyboard.TargetName="RootBorder" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        To="#20EF4444" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="Opacity" To="0.25" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="BlurRadius" To="12" Duration="0:0:0.2"/>
+                                        <!-- 가운데 기준 스케일링 -->
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <!-- 아이콘 더 진하게 -->
+                                        <DoubleAnimation Storyboard.TargetName="DeleteIcon" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <!-- 눌림 효과 -->
+                                        <ColorAnimation Storyboard.TargetName="RootBorder" 
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" 
+                                                        To="#35EF4444" Duration="0:0:0.08"/>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="Opacity" To="0.1" Duration="0:0:0.08"/>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="BlurRadius" To="6" Duration="0:0:0.08"/>
+                                        <!-- 가운데 기준 축소 -->
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleX" To="0.9" Duration="0:0:0.08">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="IconScale" Storyboard.TargetProperty="ScaleY" To="0.9" Duration="0:0:0.08">
+                                            <DoubleAnimation.EasingFunction>
+                                                <QuadraticEase EasingMode="EaseInOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <!-- 아이콘 강조 -->
+                                        <DoubleAnimation Storyboard.TargetName="DeleteIcon" Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.08"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <!-- 비활성화 상태 -->
+                                        <DoubleAnimation Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Opacity" To="0.3" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetName="ButtonShadow" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <!-- 아이콘 컨테이너 -->
+                        <Grid RenderTransformOrigin="0.5,0.5">
+                            <Grid.RenderTransform>
+                                <ScaleTransform x:Name="IconScale" ScaleX="1" ScaleY="1"/>
+                            </Grid.RenderTransform>
+
+                            <!-- Delete 아이콘 -->
+                            <Path x:Name="DeleteIcon"
+                                  Data="{StaticResource DeleteIconGeometry}"
+                                  Fill="{DynamicResource AccentRedColor}"
+                                  Stretch="Uniform" 
+                                  Width="20" Height="20"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Opacity="0.7"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
