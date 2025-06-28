@@ -117,7 +117,7 @@ We welcome contributions from the community! This project thrives on collaborati
 ### Development Setup
 ```bash
 # Clone your fork
-git clone https://github.com/your-username/ollama-manager.git
+git clone https://github.com/opensilver/ollamamanager.git
 
 # Install dependencies
 dotnet restore
