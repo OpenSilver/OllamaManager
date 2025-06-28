@@ -6,6 +6,8 @@ Ollama Manager is an open-source web application that provides an intuitive and 
 
 ![image](https://github.com/user-attachments/assets/8c3bcfc6-ae3f-4d58-9cce-f18285506f1c)
 
+![image](https://github.com/user-attachments/assets/1daeb5bd-a1d9-4cd0-bc15-3fd779950a4b)
+
 
 ## ✨ Features
 
