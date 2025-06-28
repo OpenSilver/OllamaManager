@@ -4,6 +4,9 @@
 
 Ollama Manager is an open-source web application that provides an intuitive and modern interface for managing your Ollama models. Built with OpenSilver and real-time SignalR communication, it offers a seamless experience for interacting with local AI models.
 
+![image](https://github.com/user-attachments/assets/8c3bcfc6-ae3f-4d58-9cce-f18285506f1c)
+
+
 ## ✨ Features
 
 ### 🎯 Currently Available
