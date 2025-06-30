@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLLMServer", "LocalLLMServer\LocalLLMServer.csproj", "{114728BC-DCA9-6AAB-73F2-C3E78DDD08B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLLMServer", "server-minimalapi\LocalLLMServer\LocalLLMServer.csproj", "{C846FE1B-9DD7-20A8-66B1-46CF7BFD0463}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{114728BC-DCA9-6AAB-73F2-C3E78DDD08B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{114728BC-DCA9-6AAB-73F2-C3E78DDD08B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{114728BC-DCA9-6AAB-73F2-C3E78DDD08B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{114728BC-DCA9-6AAB-73F2-C3E78DDD08B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C846FE1B-9DD7-20A8-66B1-46CF7BFD0463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C846FE1B-9DD7-20A8-66B1-46CF7BFD0463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C846FE1B-9DD7-20A8-66B1-46CF7BFD0463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C846FE1B-9DD7-20A8-66B1-46CF7BFD0463}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

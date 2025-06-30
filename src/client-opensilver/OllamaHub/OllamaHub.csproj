@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OllamaHub.Support\OllamaHub.Support.csproj" />
+    <ProjectReference Include="..\OllamaHub.Support\OllamaHub.Support.csproj" />
   </ItemGroup>
 
 </Project>
