@@ -76,28 +76,27 @@ src/
 - **WASM Tools**: `dotnet workload install wasm-tools`
 - **OpenSilver SDK**: [www.opensilver.net](https://www.opensilver.net)에서 `OpenSilver_SDK_v3.2.0.4.vsix` 다운로드 후 설치
 
-### 웹 버전 (OpenSilver)
+### 서버 실행
 
-1. 백엔드 서버 실행
+먼저 백엔드 서버를 실행합니다:
 ```bash
 cd src/server-minimalapi/LocalLLMServer
 dotnet run --launch-profile https
 ```
 서버가 `https://localhost:7262`에서 실행됩니다.
 
-2. 웹 클라이언트 실행
+### OpenSilver 웹 클라이언트
+
 ```bash
 cd src/client-opensilver/OllamaHub.Browser
 dotnet run
 ```
 
-3. 브라우저에서 `http://localhost:55592` 접속
+브라우저에서 `http://localhost:55592` 접속
 
-### 데스크톱 버전 (WPF)
+### WPF 버전
 
-1. 백엔드 서버 실행 (위와 동일)
-
-2. WPF 애플리케이션 실행
+동일한 서버를 사용하여 WPF 버전도 실행할 수 있습니다:
 ```bash
 cd src/client-wpf/OllamaHub
 dotnet run
