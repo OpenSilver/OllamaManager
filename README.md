@@ -1,169 +1,112 @@
 # Ollama Manager
+A web application for managing Ollama models, developed with OpenSilver.
+This project also provides a desktop version migrated from the OpenSilver version to WPF, allowing you to compare and learn the development experience between the two platforms.
 
-🚀 **Modern Web-based Ollama Management Interface**
+## Table of Contents
+- [Screenshots](#screenshots)
+- [Key Features](#key-features)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Server Architecture](#server-architecture)
+- [How to Run](#how-to-run)
+- [Development Roadmap](#development-roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Notes](#notes)
 
-Ollama Manager is an open-source web application that provides an intuitive and modern interface for managing your Ollama models. Built with OpenSilver and real-time SignalR communication, it offers a seamless experience for interacting with local AI models.
+## Screenshots
+Easily manage Ollama models and chat in real-time with an intuitive interface.
 
-![image](https://github.com/user-attachments/assets/8c3bcfc6-ae3f-4d58-9cce-f18285506f1c)
+| Main Screen | Chat Screen |
+|-------------|-------------|
+| ![Main Screen](https://github.com/user-attachments/assets/8c3bcfc6-ae3f-4d58-9cce-f18285506f1c) | ![Chat Screen](https://github.com/user-attachments/assets/1daeb5bd-a1d9-4cd0-bc15-3fd779950a4b) |
 
-![image](https://github.com/user-attachments/assets/1daeb5bd-a1d9-4cd0-bc15-3fd779950a4b)
+## Key Features
+- View installed model list
+- Start/Stop models
+- Real-time chat
+- Model status monitoring
 
-
-## ✨ Features
-
-### 🎯 Currently Available
-- **📋 Model Overview**: View all installed models with real-time status indicators
-- **⚡ Model Control**: Start and stop models with a single click
-- **💬 Interactive Chat**: Chat with your running models in real-time
-- **🔄 Real-time Updates**: All operations sync instantly via SignalR
-
-### 🔮 Coming Soon
-- **📥 Model Downloads**: Download new models directly from the interface
-- **🗑️ Model Management**: Remove unused models to free up space
-- **🎭 Multi-Model Chat**: Manage separate chat sessions for different models
-- **📊 Performance Monitoring**: View model resource usage and performance metrics
-- **🎨 Customizable Themes**: Personalize your management experience
-- **👥 Multi-User Support**: Share and collaborate with team members
-
-## 🏗️ Architecture
-
+## Project Structure
 ```
-OpenSilver Frontend ↔ SignalR Hub ↔ Minimal API ↔ Ollama API/CLI
+src/
+├── client-opensilver/    # OpenSilver web client
+├── client-wpf/          # WPF desktop client
+└── server-minimalapi/   # Shared backend server
 ```
 
-### Technology Stack
-- **Frontend**: OpenSilver (Silverlight for modern web)
-- **Backend**: ASP.NET Core Minimal API
+## Tech Stack
+- **Web Client**: OpenSilver (.NET Standard 2.0)
+- **Desktop Client**: WPF (.NET 9.0)
+- **Backend**: ASP.NET Core Minimal API (.NET 9.0)
 - **Real-time Communication**: SignalR
-- **Target**: Ollama API & Command Line Interface
 
-## 🚀 Quick Start
+## Server Architecture
+
+### Minimal API Structure
+- **GET** `/api/models` - Retrieve installed model list and status
+- **POST** `/api/models/{modelName}/start` - Start model
+- **POST** `/api/models/{modelName}/stop` - Stop model
+- **POST** `/api/chat` - Chat with model
+
+### Ollama API Integration
+The backend server manages models using the Ollama API:
+- `http://localhost:11434/api/tags` - List of installed models
+- `http://localhost:11434/api/ps` - Check running models
+- `http://localhost:11434/api/generate` - Model load/unload and chat
+
+### Real-time Monitoring
+- Real-time model status updates via SignalR Hub
+- Background service to detect model status changes
+
+## How to Run
 
 ### Prerequisites
-- [.NET 8.0 or later](https://dotnet.microsoft.com/download)
-- [Ollama](https://ollama.ai/) installed and running
-- Modern web browser with WebAssembly support
+- .NET 9.0 SDK
+- Ollama installed and running
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/ollama-manager.git
-   cd ollama-manager
-   ```
-
-2. **Restore dependencies**
-   ```bash
-   dotnet restore
-   ```
-
-3. **Run the application**
-   ```bash
-   dotnet run
-   ```
-
-4. **Open your browser**
-   Navigate to `https://localhost:5001`
-
-## 🗺️ Roadmap
-
-### Phase 1: Core Foundation ✅
-- [x] Model listing and status monitoring
-- [x] Basic model start/stop functionality
-- [x] Real-time chat interface
-- [x] SignalR integration
-
-### Phase 2: Enhanced Management 🚧
-- [ ] Model download and installation
-- [ ] Model deletion and cleanup
-- [ ] Multi-session chat management
-- [ ] Configuration management
-
-### Phase 3: Advanced Features 📋
-- [ ] Performance monitoring and analytics
-- [ ] User authentication and profiles
-- [ ] Team collaboration features
-- [ ] Plugin system for extensions
-- [ ] REST API for third-party integrations
-- [ ] Docker containerization
-
-### Phase 4: Enterprise Ready 🎯
-- [ ] Multi-instance management
-- [ ] Advanced security features
-- [ ] Audit logging and compliance
-- [ ] High availability deployment
-- [ ] Advanced monitoring and alerting
-
-## 🤝 Contributing
-
-We welcome contributions from the community! This project thrives on collaboration and diverse perspectives.
-
-### Ways to Contribute
-- 🐛 **Bug Reports**: Found an issue? Let us know!
-- ✨ **Feature Requests**: Have an idea? We'd love to hear it!
-- 📝 **Documentation**: Help improve our docs
-- 💻 **Code Contributions**: Fix bugs, add features, improve performance
-- 🧪 **Testing**: Help us ensure quality across different environments
-- 🎨 **UI/UX Design**: Make the interface even better
-
-### Getting Started
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
-
-### Development Setup
+### Web Version (OpenSilver)
+1. Run the backend server
 ```bash
-# Clone your fork
-git clone https://github.com/opensilver/ollamamanager.git
-
-# Install dependencies
-dotnet restore
-
-# Run in development mode
-dotnet run --environment Development
+cd src/server-minimalapi
+dotnet run
 ```
 
-### Code Guidelines
-- Follow C# coding conventions
-- Add unit tests for new features
-- Update documentation for API changes
-- Ensure SignalR hubs are properly tested
+2. Run the web client
+```bash
+cd src/client-opensilver
+dotnet run
+```
 
-## 🏷️ Good First Issues
+3. Access `https://localhost:5001` in your browser
 
-New to the project? Look for issues labeled with:
-- `good-first-issue`: Perfect for newcomers
-- `help-wanted`: We need your expertise
-- `documentation`: Improve our docs
-- `enhancement`: Add new features
+### Desktop Version (WPF)
+1. Run the backend server (same as above)
+2. Run the WPF application
+   - Execute `dotnet run` in the `src/client-wpf` folder
 
-## 💬 Community
+## Development Roadmap
 
-- **Discussions**: Use GitHub Discussions for questions and ideas
-- **Issues**: Report bugs and request features via GitHub Issues
-- **Wiki**: Check our Wiki for detailed documentation
+### Currently Implemented
+- Model list retrieval
+- Model control (start/stop)
+- Real-time chat
 
-## 📋 Requirements
+### Planned Features
+- Model download
+- Model deletion
+- Multi-session chat
+- Performance monitoring
 
-- **.NET 8.0+**: For running the Minimal API backend
-- **Ollama**: Must be installed and accessible
-- **Modern Browser**: Chrome, Firefox, Safari, or Edge with WebAssembly support
+## Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Create a Pull Request
 
-## 📄 License
+## License
+MIT License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Ollama Team**: For creating an amazing local AI platform
-- **OpenSilver Team**: For bringing Silverlight to the modern web
-- **Contributors**: Everyone who helps make this project better
-
----
-
-**⭐ Star this repository if you find it useful!**
-
-**🤝 Join our community of contributors and help shape the future of Ollama management!**
+## Notes
+- This is an excellent example to verify code compatibility between WPF and OpenSilver
+- OpenSilver is based on .NET Standard 2.0 and provides a WPF-like development experience on the web
