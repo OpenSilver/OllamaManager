@@ -69,31 +69,39 @@ src/
 ## 실행 방법
 
 ### 사전 요구사항
-- .NET 9.0 SDK
-- Ollama 설치 및 실행 중
+- **Ollama**: [ollama.com](https://ollama.com)에서 설치
+- **모델 설치**: 예시로 `ollama pull llama3.2` 실행
+- **Visual Studio 2022**
+- **.NET 9.0 SDK**
+- **WASM Tools**: `dotnet workload install wasm-tools`
+- **OpenSilver SDK**: [www.opensilver.net](https://www.opensilver.net)에서 `OpenSilver_SDK_v3.2.0.4.vsix` 다운로드 후 설치
 
 ### 웹 버전 (OpenSilver)
 
 1. 백엔드 서버 실행
 ```bash
-cd src/server-minimalapi
-dotnet run
+cd src/server-minimalapi/LocalLLMServer
+dotnet run --launch-profile https
 ```
+서버가 `https://localhost:7262`에서 실행됩니다.
 
 2. 웹 클라이언트 실행
 ```bash
-cd src/client-opensilver
+cd src/client-opensilver/OllamaHub.Browser
 dotnet run
 ```
 
-3. 브라우저에서 `https://localhost:5001` 접속
+3. 브라우저에서 `http://localhost:55592` 접속
 
 ### 데스크톱 버전 (WPF)
 
 1. 백엔드 서버 실행 (위와 동일)
 
 2. WPF 애플리케이션 실행
-   - `src/client-wpf` 폴더에서 `dotnet run` 실행
+```bash
+cd src/client-wpf/OllamaHub
+dotnet run
+```
 
 ## 개발 계획
 
