@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:units="clr-namespace:OllamaHub.Support.UI.Units">
 
@@ -7,64 +7,85 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="units:ApplicationHeader">
-                    <Border BorderBrush="{DynamicResource BorderColor}" 
-                            BorderThickness="0,0,0,1" 
-                            Padding="32,24,32,24">
+                    <Border
+                        Padding="32,24,32,24"
+                        BorderBrush="{DynamicResource BorderColor}"
+                        BorderThickness="0,0,0,1">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!-- 로고 및 제목 -->
-                            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                                <Border Width="48" Height="48" 
-                                        CornerRadius="12" 
-                                        Background="{DynamicResource AccentBlueColor}" 
-                                        Margin="0,0,16,0"
-                                        VerticalAlignment="Center">
-                                    <Path Data="{DynamicResource TerminalIcon}" 
-                                          Fill="White" 
-                                          Stretch="Uniform" 
-                                          Width="36" Height="36"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                            <!--  로고 및 제목  -->
+                            <StackPanel
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <Border
+                                    Width="48"
+                                    Height="48"
+                                    Margin="0,0,16,0"
+                                    VerticalAlignment="Center"
+                                    Background="{DynamicResource AccentBlueColor}"
+                                    CornerRadius="12">
+                                    <Path
+                                        Width="36"
+                                        Height="36"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Data="{DynamicResource TerminalIcon}"
+                                        Fill="White"
+                                        Stretch="Uniform" />
                                 </Border>
 
                                 <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="Ollama Manager for OpenSilver" 
-                                               FontSize="24" 
-                                               FontWeight="Bold" 
-                                               Foreground="{DynamicResource TextPrimaryColor}"/>
-                                    <TextBlock Text="Local LLM Model Management Tool" 
-                                               FontSize="12" 
-                                               Foreground="{DynamicResource TextMutedColor}" 
-                                               Margin="0,4,0,0"/>
+                                    <TextBlock
+                                        FontSize="24"
+                                        FontWeight="Bold"
+                                        Foreground="{DynamicResource TextPrimaryColor}"
+                                        Text="Ollama Manager for WPF" />
+                                    <TextBlock
+                                        Margin="0,4,0,0"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextMutedColor}"
+                                        Text="Local LLM Model Management Tool" />
                                 </StackPanel>
                             </StackPanel>
 
-                            <!-- 우측 상태 및 테마 버튼 -->
-                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                                <!-- 실행 중 표시 (GlobalStatusBadge 자리) -->
-                                <Border Background="{DynamicResource SuccessBackgroundColor}" 
-                                        CornerRadius="12" 
-                                        Padding="16,8,16,8" 
-                                        Margin="0,0,16,0"
-                                        VerticalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Ellipse Width="12" Height="12" 
-                                                Fill="{DynamicResource AccentGreenColor}" 
-                                                Margin="0,0,12,0"
-                                                VerticalAlignment="Center"/>
-                                        <TextBlock Text="codellama:7b Running" 
-                                                  FontSize="12" 
-                                                  FontWeight="SemiBold" 
-                                                  Foreground="{DynamicResource AccentGreenColor}"
-                                                  VerticalAlignment="Center"/>
+                            <!--  우측 상태 및 테마 버튼  -->
+                            <StackPanel
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <!--  실행 중 표시 (GlobalStatusBadge 자리)  -->
+                                <Border
+                                    Margin="0,0,16,0"
+                                    Padding="16,8,16,8"
+                                    VerticalAlignment="Center"
+                                    Background="{DynamicResource SuccessBackgroundColor}"
+                                    CornerRadius="12">
+                                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="12"
+                                            Height="12"
+                                            Margin="0,0,12,0"
+                                            VerticalAlignment="Center"
+                                            Fill="{DynamicResource AccentGreenColor}" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource AccentGreenColor}"
+                                            Text="codellama:7b Running" />
                                     </StackPanel>
                                 </Border>
                             </StackPanel>
-                            <units:GlobalStatusBadge Grid.Column="2" Status="SingleModelRunning" ModelName="codellama:7b" RunningCount="5"/>
+                            <units:GlobalStatusBadge
+                                Grid.Column="2"
+                                ModelName="codellama:7b"
+                                RunningCount="5"
+                                Status="SingleModelRunning" />
                         </Grid>
                     </Border>
                 </ControlTemplate>
