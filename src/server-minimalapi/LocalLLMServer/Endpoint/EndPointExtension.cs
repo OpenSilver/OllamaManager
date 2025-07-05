@@ -1,5 +1,6 @@
 ﻿using LocalLLMServer.Endpoint.Dto;
 using LocalLLMServer.Model.Entity;
+using LocalLLMServer.SignalRHub;
 using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 using System.Text.Json;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using LocalLLMServer.SignalRHub;
+using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 
 namespace LocalLLMServer.Service.Background;
