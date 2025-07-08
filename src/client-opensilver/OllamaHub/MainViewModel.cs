@@ -13,7 +13,7 @@ namespace OllamaHub;
 
 public partial class MainViewModel : ObservableObject
 {
-    private readonly ApiClient<ModelItem> _apiClient;
+    private readonly ApiClient _apiClient;
     private HubConnection? _hubConnection;
 
     [ObservableProperty]
@@ -39,7 +39,7 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
-        _apiClient = new ApiClient<ModelItem>();
+        _apiClient = new ApiClient();
         _ = InitializeAsync();
     }
 
@@ -54,7 +54,7 @@ public partial class MainViewModel : ObservableObject
     {
         IsLoading = true;
 
-        var modelList = await _apiClient.GetAsync("https://localhost:7262/api/models");
+        var modelList = await _apiClient.GetAsync<ModelItem>("https://localhost:7262/api/models");
 
         Models = new ObservableCollection<ModelItem>(modelList);
         RunningModels = new ObservableCollection<ModelItem>(modelList.Where(m => m.Status == "Running"));

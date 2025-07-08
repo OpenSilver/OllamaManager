@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OllamaHub.Support.Local.Services;
 
-public class ApiClient<T>
+public class ApiClient
 {
     private readonly HttpClient _http;
 
@@ -17,7 +17,7 @@ public class ApiClient<T>
         _http.Timeout = TimeSpan.FromMinutes(5);
     }
 
-    public async Task<List<T>> GetAsync(string url)
+    public async Task<List<T>> GetAsync<T>(string url)
     {
         var json = await _http.GetStringAsync(url);
         var options = new JsonSerializerOptions

@@ -11,7 +11,7 @@ namespace OllamaHub.Main.Local.ViewModels;
 
 public partial class MainViewModel : ViewModelBase
 {
-    private readonly ApiClient<ModelItem> _apiClient;
+    private readonly ApiClient _apiClient;
     private HubConnection? _hubConnection;
 
     private ObservableCollection<ModelItem> models = new();
@@ -71,7 +71,7 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
-        _apiClient = new ApiClient<ModelItem>();
+        _apiClient = new ApiClient();
 
         // Command 초기화
         LoadModelsCommand = new RelayCommand(async () => await LoadModelsAsync());
@@ -91,7 +91,7 @@ public partial class MainViewModel : ViewModelBase
     {
         IsLoading = true;
 
-        var modelList = await _apiClient.GetAsync("https://localhost:7262/api/models");
+        var modelList = await _apiClient.GetAsync<ModelItem>("https://localhost:7262/api/models");
 
         Models = new ObservableCollection<ModelItem>(modelList);
         RunningModels = new ObservableCollection<ModelItem>(modelList.Where(m => m.Status == "Running"));
