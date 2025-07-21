@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OllamaHub.Support.Local.Models;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -7,51 +8,68 @@ using System.Threading.Tasks;
 
 namespace OllamaHub.Support.Local.Services;
 
-public class ApiClient
+public class ApiClient : IDisposable
 {
     private readonly HttpClient _http;
+    private readonly JsonSerializerOptions _jsonOptions;
 
-    public ApiClient()
+    public ApiClient(string baseUrl)
     {
-        _http = new();
-        _http.Timeout = TimeSpan.FromMinutes(5);
-    }
+        _http = new HttpClient
+        {
+            BaseAddress = new Uri(baseUrl),
+            Timeout = TimeSpan.FromMinutes(5)
+        };
 
-    public async Task<List<T>> GetAsync<T>(string url)
-    {
-        var json = await _http.GetStringAsync(url);
-        var options = new JsonSerializerOptions
+        _jsonOptions = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         };
-        var response = JsonSerializer.Deserialize<ApiResponse<List<T>>>(json, options);
-        return response?.Models ?? new List<T>();
     }
 
-    public async Task<string> PostAsync(string url)
+    public async Task<List<T>> GetAsync<T>(string endpoint)
     {
-        var response = await _http.PostAsync(url, null);
-        return await response.Content.ReadAsStringAsync();
+        try
+        {
+            var response = await _http.GetAsync(endpoint);
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            var apiResponse = JsonSerializer.Deserialize<ApiResponse<List<T>>>(json, _jsonOptions);
+            return apiResponse?.Models ?? new List<T>();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API GET 오류: {ex.Message}");
+            return new List<T>();
+        }
     }
 
-    public async Task<string> PostAsync(string url, object data)
+    public async Task<string> PostAsync(string endpoint, object data = null)
     {
-        var json = JsonSerializer.Serialize(data);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
-        var response = await _http.PostAsync(url, content);
-        return await response.Content.ReadAsStringAsync();
+        try
+        {
+            HttpContent content = null;
+            if (data != null)
+            {
+                var json = JsonSerializer.Serialize(data);
+                content = new StringContent(json, Encoding.UTF8, "application/json");
+            }
+
+            var response = await _http.PostAsync(endpoint, content);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API POST 오류: {ex.Message}");
+            return string.Empty;
+        }
     }
 
     public void Dispose()
     {
         _http?.Dispose();
     }
-}
-
-public class ApiResponse<T>
-{
-    public string Message { get; set; } = "";
-    public int Count { get; set; }
-    public T Models { get; set; } = default!;
-    public bool Success { get; set; } = true;
 }

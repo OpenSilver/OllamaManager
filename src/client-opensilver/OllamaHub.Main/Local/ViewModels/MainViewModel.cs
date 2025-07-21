@@ -10,7 +10,7 @@ using Jamesnet.Foundation;
 
 namespace OllamaHub.Main.Local.ViewModels;
 
-public class MainViewModel : ViewModelBase
+public class MainViewModel : ViewModelBase, IDisposable
 {
     private readonly ApiClient _apiClient;
     private readonly HubConnection _hubConnection;
@@ -84,33 +84,44 @@ public class MainViewModel : ViewModelBase
         _apiClient = apiClient;
         _hubConnection = hubConnection;
 
-        LoadModelsCommand = new RelayCommand(LoadModelsAsync);
-        SendMessageCommand = new RelayCommand(SendMessageAsync);
-        ToggleModelCommand = new RelayCommand<ModelItem>(ToggleModelAsync);
+        LoadModelsCommand = new RelayCommand(async () => await LoadModelsAsync());
+        SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
+        ToggleModelCommand = new RelayCommand<ModelItem>(async (model) => await ToggleModelAsync(model));
 
-        InitializeAsync();
+        _ = InitializeAsync();
     }
 
-    private async void InitializeAsync()
+    private async Task InitializeAsync()
     {
-        LoadModelsAsync();
+        await LoadModelsAsync();
         await ConnectToSignalRAsync();
     }
 
-    private async void LoadModelsAsync()
+    private async Task LoadModelsAsync()
     {
         IsLoading = true;
-
-        var modelList = await _apiClient.GetAsync<ModelItem>("https://localhost:7262/api/models");
-
-        Models = new ObservableCollection<ModelItem>(modelList);
-        RunningModels = new ObservableCollection<ModelItem>(modelList.Where(m => m.Status == "Running"));
-        CurrentModel = RunningModels.FirstOrDefault();
-
-        IsLoading = false;
+        try
+        {
+            var modelList = await _apiClient.GetAsync<ModelItem>("models");
+            Models.Clear();
+            foreach (var model in modelList)
+            {
+                Models.Add(model);
+            }
+            UpdateRunningModels();
+            CurrentModel = RunningModels.FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Load models error: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
-    private async void SendMessageAsync()
+    private async Task SendMessageAsync()
     {
         if (string.IsNullOrWhiteSpace(InputText) || IsChatLoading) return;
 
@@ -124,63 +135,93 @@ public class MainViewModel : ViewModelBase
         });
 
         IsChatLoading = true;
-        await _apiClient.PostAsync("https://localhost:7262/api/chat", new
+        try
         {
-            message = userMessage,
-            model = CurrentModel?.Name
-        });
+            await _apiClient.PostAsync("chat", new
+            {
+                message = userMessage,
+                model = CurrentModel?.Name
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Send message error: {ex.Message}");
+            IsChatLoading = false;
+        }
     }
 
     private async Task ConnectToSignalRAsync()
     {
-        _hubConnection.On<string, string>("ModelStatusChanged", (modelName, status) =>
+        try
         {
-            var model = Models.FirstOrDefault(m => m.Name == modelName);
-            if (model != null)
+            _hubConnection.On<string, string>("ModelStatusChanged", (modelName, status) =>
             {
-                model.Status = status;
-
-                RunningModels = new ObservableCollection<ModelItem>(Models.Where(m => m.Status == "Running"));
-
-                if (CurrentModel?.Status != "Running")
+                var model = Models.FirstOrDefault(m => m.Name == modelName);
+                if (model != null)
                 {
-                    CurrentModel = RunningModels.FirstOrDefault();
+                    model.Status = status;
+                    UpdateRunningModels();
+                    if (CurrentModel?.Status != "Running")
+                    {
+                        CurrentModel = RunningModels.FirstOrDefault();
+                    }
                 }
-            }
-        });
+            });
 
-        _hubConnection.On<string>("ChatMessageReceived", (message) =>
-        {
-            if (!string.IsNullOrEmpty(message))
+            _hubConnection.On<string>("ChatMessageReceived", (message) =>
             {
-                ChatMessages.Add(new AIMessage
+                if (!string.IsNullOrEmpty(message))
                 {
-                    Content = message,
-                    Timestamp = DateTime.Now
-                });
-            }
-            IsChatLoading = false;
-        });
+                    ChatMessages.Add(new AIMessage
+                    {
+                        Content = message,
+                        Timestamp = DateTime.Now
+                    });
+                }
+                IsChatLoading = false;
+            });
 
-        _hubConnection.Closed += async (error) =>
-        {
-            await Task.Delay(new Random().Next(0, 5) * 1000);
+            _hubConnection.Closed += async (error) =>
+            {
+                await Task.Delay(new Random().Next(0, 5) * 1000);
+                await _hubConnection.StartAsync();
+            };
+
+            _hubConnection.Reconnecting += (error) => Task.CompletedTask;
+            _hubConnection.Reconnected += (connectionId) => Task.CompletedTask;
+
             await _hubConnection.StartAsync();
-        };
-
-        _hubConnection.Reconnecting += (error) => Task.CompletedTask;
-        _hubConnection.Reconnected += (connectionId) => Task.CompletedTask;
-
-        await _hubConnection.StartAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"SignalR connection error: {ex.Message}");
+        }
     }
 
-    private async void ToggleModelAsync(ModelItem model)
+    private async Task ToggleModelAsync(ModelItem model)
     {
         if (model == null) return;
 
         var action = model.Status == "Running" ? "stop" : "start";
         model.Status = model.Status == "Running" ? "Stopping" : "Starting";
-        await _apiClient.PostAsync($"https://localhost:7262/api/models/{model.Name}/{action}");
+        try
+        {
+            await _apiClient.PostAsync($"models/{model.Name}/{action}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Toggle model error: {ex.Message}");
+        }
+    }
+
+    private void UpdateRunningModels()
+    {
+        var running = Models.Where(m => m.Status == "Running").ToList();
+        RunningModels.Clear();
+        foreach (var model in running)
+        {
+            RunningModels.Add(model);
+        }
     }
 
     public async Task DisconnectAsync()
@@ -189,5 +230,11 @@ public class MainViewModel : ViewModelBase
         {
             await _hubConnection.DisposeAsync();
         }
+    }
+
+    public void Dispose()
+    {
+        _apiClient.Dispose();
+        DisconnectAsync().GetAwaiter().GetResult();
     }
 }

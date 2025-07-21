@@ -10,7 +10,10 @@
   <ItemGroup>
     <Compile Include="Local\Converters\EqualToVisibilityConverter.cs" />
     <Compile Include="Local\Converters\NullToBooleanConverter.cs" />
+    <Compile Include="Local\Models\AIMessage.cs" />
+    <Compile Include="Local\Models\ApiResponse.cs" />
     <Compile Include="Local\Models\ModelItem.cs" />
+    <Compile Include="Local\Models\UserMessage.cs" />
     <Compile Include="Local\Services\ApiClient.cs" />
     <Compile Include="UI\Units\AIMessageListBoxItem.cs" />
     <Compile Include="UI\Units\ApplicationHeader.cs" />

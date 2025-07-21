@@ -18,7 +18,6 @@
                             Padding="{TemplateBinding Padding}">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="StatusStates">
-                                <!-- NoModelsRunning 상태 -->
                                 <VisualState x:Name="NoModelsRunning">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -35,8 +34,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- SingleModelRunning 상태 -->
                                 <VisualState x:Name="SingleModelRunning">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -50,8 +47,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- MultipleModelsRunning 상태 -->
                                 <VisualState x:Name="MultipleModelsRunning">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -65,8 +60,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- SystemLoading 상태 -->
                                 <VisualState x:Name="SystemLoading">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -83,8 +76,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- SystemError 상태 -->
                                 <VisualState x:Name="SystemError">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -101,8 +92,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- SystemIdle 상태 -->
                                 <VisualState x:Name="SystemIdle">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -119,8 +108,6 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-
-                                <!-- AllModelsDownloading 상태 -->
                                 <VisualState x:Name="AllModelsDownloading">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootBorder" Storyboard.TargetProperty="Background">
@@ -139,7 +126,6 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Ellipse x:Name="StatusIndicator"
                                      Width="12" Height="12" 

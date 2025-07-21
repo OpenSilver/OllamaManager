@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using OllamaHub.Main.Local.ViewModels;
 using OllamaHub.Main.UI.Views;
 using OllamaHub.Support.Local.Services;
+using System;
 
 namespace OllamaHub
 {
@@ -10,13 +11,16 @@ namespace OllamaHub
     {
         protected override void RegisterDependencies(IContainer container)
         {
-            HubConnection _hubConnection = new HubConnectionBuilder()
+            var hubConnection = new HubConnectionBuilder()
                 .WithUrl("https://localhost:7262/modelhub")
-                .WithAutomaticReconnect()
+                .WithAutomaticReconnect(new[] { TimeSpan.Zero, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(10) })
                 .Build();
 
-            container.RegisterInstance(_hubConnection);
-            container.RegisterSingleton<ApiClient, ApiClient>();
+            container.RegisterInstance(hubConnection);
+
+            var apiClient = new ApiClient("https://localhost:7262/api/");
+            container.RegisterInstance(apiClient);
+
             container.RegisterSingleton<IView, MainContent>(nameof(MainContent));
         }
 
