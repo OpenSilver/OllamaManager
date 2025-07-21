@@ -12,7 +12,6 @@ namespace OllamaHub
         public MainPage()
         {
             this.InitializeComponent();
-            DataContext = new MainViewModel();
         }
     }
 }

@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.SignalR.Client;
 using OllamaHub.Main.Local.ViewModels;
 using OllamaHub.Main.UI.Views;
 using OllamaHub.Support.Local.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OllamaHub
 {

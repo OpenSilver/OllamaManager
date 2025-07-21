@@ -12,68 +12,77 @@ namespace OllamaHub.Main.Local.ViewModels;
 public partial class MainViewModel : ViewModelBase
 {
     private readonly ApiClient _apiClient;
-    private HubConnection? _hubConnection;
+    private readonly HubConnection _hubConnection;
 
-    private ObservableCollection<ModelItem> models = new();
-    private ObservableCollection<ModelItem> runningModels = new();
-    private bool isLoading = false;
-    private ObservableCollection<object> chatMessages = new();
-    private string inputText = "";
-    private bool isChatLoading = false;
-    private ModelItem currentModel;
+    private ObservableCollection<ModelItem> _models;
+    private ObservableCollection<ModelItem> _runningModels;
+    private bool _isLoading;
+    private ObservableCollection<object> _chatMessages;
+    private string _inputText;
+    private bool _isChatLoading;
+    private ModelItem _currentModel;
 
     public ObservableCollection<ModelItem> Models
     {
-        get => models;
-        set => SetProperty(ref models, value);
+        get => _models;
+        set => SetProperty(ref _models, value);
     }
 
     public ObservableCollection<ModelItem> RunningModels
     {
-        get => runningModels;
-        set => SetProperty(ref runningModels, value);
+        get => _runningModels;
+        set => SetProperty(ref _runningModels, value);
     }
 
     public bool IsLoading
     {
-        get => isLoading;
-        set => SetProperty(ref isLoading, value);
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
     }
 
     public ObservableCollection<object> ChatMessages
     {
-        get => chatMessages;
-        set => SetProperty(ref chatMessages, value);
+        get => _chatMessages;
+        set => SetProperty(ref _chatMessages, value);
     }
 
     public string InputText
     {
-        get => inputText;
-        set => SetProperty(ref inputText, value);
+        get => _inputText;
+        set => SetProperty(ref _inputText, value);
     }
 
     public bool IsChatLoading
     {
-        get => isChatLoading;
-        set => SetProperty(ref isChatLoading, value);
+        get => _isChatLoading;
+        set => SetProperty(ref _isChatLoading, value);
     }
 
     public ModelItem CurrentModel
     {
-        get => currentModel;
-        set => SetProperty(ref currentModel, value);
+        get => _currentModel;
+        set => SetProperty(ref _currentModel, value);
     }
 
-    // ICommand 프로퍼티들
     public ICommand LoadModelsCommand { get; }
     public ICommand SendMessageCommand { get; }
     public ICommand ToggleModelCommand { get; }
 
-    public MainViewModel()
+    public MainViewModel(
+        ApiClient apiClient,
+        HubConnection hubConnection)
     {
-        _apiClient = new ApiClient();
+        Models = [];
+        RunningModels = [];
+        ChatMessages = [];
+        InputText = "";
+        IsLoading = false;
+        IsChatLoading = false;
+        CurrentModel = null;
 
-        // Command 초기화
+        _apiClient = apiClient;
+        _hubConnection = hubConnection;
+
         LoadModelsCommand = new RelayCommand(async () => await LoadModelsAsync());
         SendMessageCommand = new RelayCommand(async () => await SendMessageAsync());
         ToggleModelCommand = new RelayCommand<ModelItem>(OnPlayStop);
@@ -123,11 +132,6 @@ public partial class MainViewModel : ViewModelBase
 
     private async Task ConnectToSignalRAsync()
     {
-        _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:7262/modelhub")
-            .WithAutomaticReconnect()
-            .Build();
-
         _hubConnection.On<string, string>("ModelStatusChanged", (modelName, status) =>
         {
             var model = Models.FirstOrDefault(m => m.Name == modelName);
@@ -135,10 +139,8 @@ public partial class MainViewModel : ViewModelBase
             {
                 model.Status = status;
 
-                // RunningModels 업데이트
                 RunningModels = new ObservableCollection<ModelItem>(Models.Where(m => m.Status == "Running"));
 
-                // CurrentModel이 실행중이 아니면 새로 설정
                 if (CurrentModel?.Status != "Running")
                 {
                     CurrentModel = RunningModels.FirstOrDefault();
@@ -172,11 +174,6 @@ public partial class MainViewModel : ViewModelBase
         _hubConnection.Reconnected += (connectionId) => Task.CompletedTask;
 
         await _hubConnection.StartAsync();
-    }
-
-    private bool CanToggleModel(ModelItem model)
-    {
-        return model != null && (model.Status == "Stopped" || model.Status == "Running");
     }
 
     private async void OnPlayStop(ModelItem model)

@@ -7,9 +7,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub", "client-opensil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Browser", "client-opensilver\OllamaHub.Browser\OllamaHub.Browser.csproj", "{027ADC29-76E8-1B3F-3464-C54C0E9417C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Simulator", "client-opensilver\OllamaHub.Simulator\OllamaHub.Simulator.csproj", "{CFD53630-8A99-3265-A046-8CF7528B4769}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Support", "client-opensilver\OllamaHub.Support\OllamaHub.Support.csproj", "{33586B4F-83EF-9A03-C6C7-4959C83D11BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{ED3DE717-1672-4FD7-AD3D-EE8A681B78AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Based", "Based", "{FFF3EAF6-7F8A-4C6F-841C-C389C50A7FC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Partial", "Partial", "{CF04B1B3-6F0C-4513-8FE9-A05F8D9896E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OllamaHub.Main", "client-opensilver\OllamaHub.Main\OllamaHub.Main.csproj", "{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,17 +33,23 @@ Global
 		{027ADC29-76E8-1B3F-3464-C54C0E9417C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{027ADC29-76E8-1B3F-3464-C54C0E9417C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{027ADC29-76E8-1B3F-3464-C54C0E9417C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CFD53630-8A99-3265-A046-8CF7528B4769}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFD53630-8A99-3265-A046-8CF7528B4769}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFD53630-8A99-3265-A046-8CF7528B4769}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFD53630-8A99-3265-A046-8CF7528B4769}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33586B4F-83EF-9A03-C6C7-4959C83D11BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33586B4F-83EF-9A03-C6C7-4959C83D11BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33586B4F-83EF-9A03-C6C7-4959C83D11BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33586B4F-83EF-9A03-C6C7-4959C83D11BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D7DC9D8-127D-A873-B5DC-67DDA6A9E73E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{027ADC29-76E8-1B3F-3464-C54C0E9417C9} = {ED3DE717-1672-4FD7-AD3D-EE8A681B78AB}
+		{33586B4F-83EF-9A03-C6C7-4959C83D11BF} = {FFF3EAF6-7F8A-4C6F-841C-C389C50A7FC7}
+		{4E08E2F1-C3D9-492C-9DC0-C23F8A17B691} = {CF04B1B3-6F0C-4513-8FE9-A05F8D9896E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8842B7F8-0001-4090-A300-290B774D96BB}

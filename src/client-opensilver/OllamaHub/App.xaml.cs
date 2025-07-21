@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jamesnet.Foundation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace OllamaHub
         {
             this.InitializeComponent();
 
-            // Enter construction logic here...
+            OllamaHubBootstrapper bootstrapper = new OllamaHubBootstrapper();
+            bootstrapper.Run();
 
             var mainPage = new MainPage();
             Window.Current.Content = mainPage;

@@ -37,7 +37,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="OpenSilver" Version="3.2.0" />
+    <PackageReference Include="Jamesnet.Platform.OpenSilver" Version="9.1.12" />
+    <PackageReference Include="OpenSilver" Version="3.2.3" />
   </ItemGroup>
 
   <ItemGroup>

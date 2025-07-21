@@ -151,7 +151,7 @@
                                                 VerticalAlignment="Center"
                                                 FontStyle="Italic"
                                                 Foreground="#666666"
-                                                Text="모델을 먼저 시작해주세요"
+                                                Text="Select a model first"
                                                 Visibility="Collapsed" />
                                         </Grid>
                                         <VisualStateManager.VisualStateGroups>

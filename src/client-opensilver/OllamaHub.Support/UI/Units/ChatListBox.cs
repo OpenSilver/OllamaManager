@@ -8,7 +8,7 @@ namespace OllamaHub.Support.UI.Units;
 
 public class ChatListBox : ListBox
 {
-    private int _currentItemIndex = -1; // 생성 중인 아이템 인덱스 추적
+    private int _currentItemIndex = -1; 
 
     public ChatListBox()
     { 

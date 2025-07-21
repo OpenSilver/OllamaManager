@@ -116,7 +116,7 @@
                                 <!-- Disabled 상태일 때 표시할 텍스트 -->
                                 <TextBlock x:Name="DisabledText" 
                                        Grid.Column="0" 
-                                       Text="모델을 먼저 시작해주세요" 
+                                       Text="Select a model first" 
                                        Foreground="#666666" 
                                        FontStyle="Italic"
                                        VerticalAlignment="Center" 

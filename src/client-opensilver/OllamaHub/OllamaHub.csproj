@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.6" />
-    <PackageReference Include="OpenSilver" Version="3.2.0" />
+    <PackageReference Include="OpenSilver" Version="3.2.3" />
     <PackageReference Include="OpenSilver.Themes.Modern" Version="3.2.0" />
   </ItemGroup>
 
@@ -26,11 +24,11 @@
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
     <Compile Include="MainPage.xaml.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="OllamaHubBootstrapper.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OllamaHub.Support\OllamaHub.Support.csproj" />
+    <ProjectReference Include="..\OllamaHub.Main\OllamaHub.Main.csproj" />
   </ItemGroup>
 
 </Project>

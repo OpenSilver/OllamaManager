@@ -51,7 +51,7 @@
                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
 
                                 <units:ModelStatusBadge Status="{Binding Status}"/>
-                                <units:PlayStopButton ModelStatus="{Binding Status}" Command="{Binding DataContext.ToggleModelCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                                <units:PlayStopButton ModelStatus="{Binding Status}" Command="{Binding DataContext.ToggleModelCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" CommandParameter="{Binding}"/>
                             </StackPanel>
                         </Grid>
                     </Border>

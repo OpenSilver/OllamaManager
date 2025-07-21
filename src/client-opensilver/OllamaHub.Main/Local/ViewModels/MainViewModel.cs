@@ -2,55 +2,102 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 using OllamaHub.Support.Local.Services;
 using Microsoft.AspNetCore.SignalR.Client;
-using OllamaHub.Support.UI.Units;
 using OllamaHub.Support.Local.Models;
+using Jamesnet.Foundation;
 
-namespace OllamaHub;
+namespace OllamaHub.Main.Local.ViewModels;
 
-public partial class MainViewModel : ObservableObject
+public class MainViewModel : ViewModelBase
 {
     private readonly ApiClient _apiClient;
-    private HubConnection? _hubConnection;
+    private readonly HubConnection _hubConnection;
 
-    [ObservableProperty]
-    private ObservableCollection<ModelItem> models = new();
+    private ObservableCollection<ModelItem> _models;
+    private ObservableCollection<ModelItem> _runningModels;
+    private bool _isLoading;
+    private ObservableCollection<object> _chatMessages;
+    private string _inputText;
+    private bool _isChatLoading;
+    private ModelItem _currentModel;
 
-    [ObservableProperty]
-    private ObservableCollection<ModelItem> runningModels = new();
-
-    [ObservableProperty]
-    private bool isLoading = false;
-
-    [ObservableProperty]
-    private ObservableCollection<object> chatMessages = new();
-
-    [ObservableProperty]
-    private string inputText = "";
-
-    [ObservableProperty]
-    private bool isChatLoading = false;
-
-    [ObservableProperty]
-    private ModelItem currentModel;
-
-    public MainViewModel()
+    public ObservableCollection<ModelItem> Models
     {
-        _apiClient = new ApiClient();
-        _ = InitializeAsync();
+        get => _models;
+        set => SetProperty(ref _models, value);
     }
 
-    private async Task InitializeAsync()
+    public ObservableCollection<ModelItem> RunningModels
     {
-        await LoadModelsAsync();
+        get => _runningModels;
+        set => SetProperty(ref _runningModels, value);
+    }
+
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+
+    public ObservableCollection<object> ChatMessages
+    {
+        get => _chatMessages;
+        set => SetProperty(ref _chatMessages, value);
+    }
+
+    public string InputText
+    {
+        get => _inputText;
+        set => SetProperty(ref _inputText, value);
+    }
+
+    public bool IsChatLoading
+    {
+        get => _isChatLoading;
+        set => SetProperty(ref _isChatLoading, value);
+    }
+
+    public ModelItem CurrentModel
+    {
+        get => _currentModel;
+        set => SetProperty(ref _currentModel, value);
+    }
+
+    public ICommand LoadModelsCommand { get; set; }
+    public ICommand SendMessageCommand { get; set; }
+    public ICommand ToggleModelCommand { get; set; }
+
+    public MainViewModel(
+        ApiClient apiClient,
+        HubConnection hubConnection)
+    {
+        Models = [];
+        RunningModels = [];
+        ChatMessages = [];
+        InputText = "";
+        IsLoading = false;
+        IsChatLoading = false;
+        CurrentModel = null;
+
+        _apiClient = apiClient;
+        _hubConnection = hubConnection;
+
+        LoadModelsCommand = new RelayCommand(LoadModelsAsync);
+        SendMessageCommand = new RelayCommand(SendMessageAsync);
+        ToggleModelCommand = new RelayCommand<ModelItem>(ToggleModelAsync);
+
+        InitializeAsync();
+    }
+
+    private async void InitializeAsync()
+    {
+        LoadModelsAsync();
         await ConnectToSignalRAsync();
     }
 
-    [RelayCommand]
-    private async Task LoadModelsAsync()
+    private async void LoadModelsAsync()
     {
         IsLoading = true;
 
@@ -63,8 +110,7 @@ public partial class MainViewModel : ObservableObject
         IsLoading = false;
     }
 
-    [RelayCommand]
-    private async Task SendMessageAsync()
+    private async void SendMessageAsync()
     {
         if (string.IsNullOrWhiteSpace(InputText) || IsChatLoading) return;
 
@@ -87,11 +133,6 @@ public partial class MainViewModel : ObservableObject
 
     private async Task ConnectToSignalRAsync()
     {
-        _hubConnection = new HubConnectionBuilder()
-            .WithUrl("https://localhost:7262/modelhub")
-            .WithAutomaticReconnect()
-            .Build();
-
         _hubConnection.On<string, string>("ModelStatusChanged", (modelName, status) =>
         {
             var model = Models.FirstOrDefault(m => m.Name == modelName);
@@ -99,10 +140,8 @@ public partial class MainViewModel : ObservableObject
             {
                 model.Status = status;
 
-                // RunningModels 업데이트
                 RunningModels = new ObservableCollection<ModelItem>(Models.Where(m => m.Status == "Running"));
 
-                // CurrentModel이 실행중이 아니면 새로 설정
                 if (CurrentModel?.Status != "Running")
                 {
                     CurrentModel = RunningModels.FirstOrDefault();
@@ -135,13 +174,7 @@ public partial class MainViewModel : ObservableObject
         await _hubConnection.StartAsync();
     }
 
-    private bool CanToggleModel(ModelItem model)
-    {
-        return model != null && (model.Status == "Stopped" || model.Status == "Running");
-    }
-
-    [RelayCommand(CanExecute = nameof(CanToggleModel))]
-    private async Task ToggleModelAsync(ModelItem model)
+    private async void ToggleModelAsync(ModelItem model)
     {
         if (model == null) return;
 
