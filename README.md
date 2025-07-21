@@ -4,6 +4,9 @@ A web-based Ollama model management application developed with OpenSilver.
 
 This project also includes a WPF desktop version migrated from the OpenSilver version, allowing developers to compare and learn from the development experience across both platforms.
 
+<img width="773" height="495" alt="OllamaManager" src="https://github.com/user-attachments/assets/2decdf5b-066f-478b-8f0e-0fd1576f4af0" />
+
+
 ## Table of Contents
 
 - [Screenshots](#screenshots)
